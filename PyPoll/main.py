@@ -23,6 +23,7 @@ for FileToCheck in FileVersion:
     Total_by_Cand =[]
     Percent_by_Cand = []
     Winner = []
+    Total = []
 
     
     with open (csvpath, 'r') as csvfile:
@@ -30,29 +31,35 @@ for FileToCheck in FileVersion:
         # Skipp headers
         next(csvreader, None)
         
+        Total_Votes = 0
+        
         for row in csvreader:
-            
+            if row[2] not in Candidate:
             #append data for candidate
-            Candidate.append(row[2])
+                Candidate.append(row[2])
+                print(Candidate)
+            else:
+                Total_Votes+=1
+                print(Total_Votes)  
+                             
+            #add count by candidate
+            Total_by_Cand = 0
+            for i in range(len(Candidate)):
+                if Candidate == Candidate:
+                    Total_by_Cand+=1
+                    print(Total_by_Cand)
+                                
+                else:
+                    Total_by_Cand+=0
+            Total = str(Total_Votes)
 
-    cleanCSV = zip(Candidate)
+    # Zip and write results in new CSV file
+    cleanCSV = zip(Candidate, Total)
     with open(PollResults, 'w', newline="") as csvfile:
 
         csvWriter = csv.writer(csvfile, delimiter=',')
         #Add headers to new CSV
-        csvWriter.writerow(["Candidate"])
+        csvWriter.writerow(["Candidate","Total_by_Cand"])
 
         #Write zipped lists to csv
         csvWriter.writerows(cleanCSV)
-
-           
-
-
-            
-
-
-        
-
-
-
-
