@@ -30,8 +30,14 @@ with open(csvfile, 'r') as RawData, open(NewCSV, 'w') as f_out:
         Month_count+=1
         record['Revenue'] = int(record['Revenue'])
         d_writer.writerow(record)
-        #print(record)
-    print(Month_count)
+        Total_Rev+=record['Revenue']
+    
+    #print(record)
+    print("Financial Analysis", "\n")
+    print("-------------------","\n")
+    print("Total Months: ", Month_count)
+    print("Total Revenue: ", Total_Rev)
+    
 
 
 
