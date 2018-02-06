@@ -8,13 +8,15 @@ import numpy as np
 #Determine which csv file version to grab
 FileVersion = ['1']
 
+
 #Loop through files
 for FileToCheck in FileVersion:
     #input file name
     csvfile = os.path.join('..', 'PyBank', 'budget_data_' + FileToCheck +'.csv' )
 
     #output file name
-    NewCSV = os.path.join('..', 'PyBank', 'Analysis.csv' )
+    NewCSV = os.path.join('..', 'PyBank', 'Analysis'+ FileToCheck + '.csv')
+    
 
     with open(csvfile, 'r') as RawData, open(NewCSV, 'w') as f_out:
         csvReader = csv.reader(RawData, delimiter=',')
@@ -32,7 +34,7 @@ for FileToCheck in FileVersion:
             record['Date'] = str(record['Date'])
             Month_count+=1
             record['Revenue'] = int(record['Revenue'])
-            d_writer.writerow(record)
+            #d_writer.writerow(record)
             Total_Rev+=record['Revenue']
             ListValues.append(int(record['Revenue']))
         x = np.array(ListValues)
@@ -40,8 +42,8 @@ for FileToCheck in FileVersion:
         Avg_Change = sum(Monthly_Change)/Month_count
         Max_Inc = max(Monthly_Change)
         Min_Inc = min(Monthly_Change)
-        
 
+        #Print results in Terminal
         print("\n")
         print("Financial Analysis", "\n")
         print("-------------------","\n")
@@ -52,6 +54,15 @@ for FileToCheck in FileVersion:
         print("Greatest Decrease in Revenue: $", Min_Inc)
         print("\n")
 
+
+    #CSV Output
+    with open(NewCSV, 'w', newline="") as csvfile:
+        csvWriter = csv.writer(csvfile, delimiter=",")
+
+        #write headers/data
+        csvWriter.writerow(["Total Months","Total Revenue","Average Revenue Change","Greatest Increase in Revenue","Greatest Decrease in Revenue"])
+        csvWriter.writerow([Month_count,Total_Rev,Avg_Change,Max_Inc,Min_Inc])
+        
 
 
 
