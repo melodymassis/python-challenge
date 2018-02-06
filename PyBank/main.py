@@ -23,12 +23,15 @@ with open(csvfile, 'r') as RawData, open(NewCSV, 'w') as f_out:
     fieldnames=['Date','Revenue']
     d_writer = csv.DictWriter(f_out, fieldnames=fieldnames)
 
+    Month_count = 0
+    Total_Rev = 0
     for record in d_reader:
         record['Date'] = str(record['Date'])
+        Month_count+=1
         record['Revenue'] = int(record['Revenue'])
         d_writer.writerow(record)
-        print(record)
-
+        #print(record)
+    print(Month_count)
 
 
 
