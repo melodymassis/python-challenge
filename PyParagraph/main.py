@@ -1,6 +1,6 @@
 #PyParagraph
 
-import re
+#import re
 
 filename = "words.txt"
 #num_words = 0
